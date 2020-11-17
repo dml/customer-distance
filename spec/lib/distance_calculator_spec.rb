@@ -90,7 +90,38 @@ RSpec.describe DistanceCalculator, '#set_destination' do
       calculator.set_destination(3.3333333, -4.4444444)
     end
 
-    it { expect(calculator.destination_longitude).to eq(3.3333333) }
-    it { expect(calculator.destination_latitude).to eq(-4.4444444) }
+    it { expect(calculator.destination_longitude).to eq(0.05817764115136789) }
+    it { expect(calculator.destination_latitude).to eq(-0.07757018820182386) }
+  end
+end
+
+RSpec.describe DistanceCalculator, '#distance' do
+  subject { calculator.distance }
+
+  let(:calculator) { described_class.new(*source) }
+
+  before do
+    calculator.set_destination(*destination)
+  end
+
+  context 'when source and destination points are equal' do
+    let(:source) { [-6.257664, 53.339428] }
+    let(:destination) { [-6.257664, 53.339428] }
+
+    it { is_expected.to eq(0) }
+  end
+
+  context 'when difference is one degree on meridian' do
+    let(:source) { [0, 0] }
+    let(:destination) { [0, 1] }
+
+    it { is_expected.to eq(111.19508023352181) }
+  end
+
+  context 'when source and destination points are different' do
+    let(:source) { [-6.257664, 53.339428] }
+    let(:destination) { [-8.5127, 51.9067] }
+
+    it { is_expected.to eq(220.32162659875155) }
   end
 end
