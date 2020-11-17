@@ -11,6 +11,11 @@ class DistanceCalculator
     @source_latitude = latitude
   end
 
+  def set_destination(longitude, latitude)
+    @destination_longitude = longitude
+    @destination_latitude = latitude
+  end
+
   def absolute_longitude_difference
     (destination_longitude - source_longitude).abs
   end

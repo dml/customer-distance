@@ -78,3 +78,19 @@ RSpec.describe DistanceCalculator, '#central_angle' do
     end
   end
 end
+
+RSpec.describe DistanceCalculator, '#set_destination' do
+  subject(:calculator) { described_class.new(0, 0) }
+
+  it { expect(calculator.destination_longitude).to be_nil }
+  it { expect(calculator.destination_latitude).to be_nil }
+
+  context 'when destination location is set' do
+    before do
+      calculator.set_destination(3.3333333, -4.4444444)
+    end
+
+    it { expect(calculator.destination_longitude).to eq(3.3333333) }
+    it { expect(calculator.destination_latitude).to eq(-4.4444444) }
+  end
+end
