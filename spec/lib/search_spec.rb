@@ -7,5 +7,5 @@ RSpec.describe Search do
 
   let(:search) { described_class.new }
 
-  it { is_expected.not_to be_happy }
+  it { is_expected.to be_happy }
 end
