@@ -15,6 +15,13 @@ class DistanceCalculator
     (destination_longitude - source_longitude).abs
   end
 
+  def central_angle
+    Math.acos(
+      Math.sin(source_latitude) * Math.sin(destination_latitude) +
+      Math.cos(source_latitude) * Math.cos(destination_latitude) * Math.cos(absolute_longitude_difference)
+    )
+  end
+
   def self.degrees_to_radians(degrees)
     degrees.to_f * Math::PI / 180
   end

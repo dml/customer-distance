@@ -47,3 +47,34 @@ RSpec.describe DistanceCalculator, '#absolute_longitude_difference' do
     end
   end
 end
+
+RSpec.describe DistanceCalculator, '#central_angle' do
+  subject { calculator.central_angle }
+
+  let(:calculator) { described_class.new(0, 0) }
+
+  [
+    { alon: 0, alat: 0, blon: 0, blat: 0, expected: 0 },
+    { alon: 1, alat: 1, blon: 1, blat: 1, expected: 0 },
+    { alon: 1, alat: 0, blon: 0, blat: 0, expected: 0.9999999999999999 },
+    { alon: 0, alat: 0, blon: 1, blat: 0, expected: 0.9999999999999999 },
+    { alon: 0, alat: 1, blon: 0, blat: 0, expected: 0.9999999999999999 },
+    { alon: 0, alat: 0, blon: 0, blat: 1, expected: 0.9999999999999999 },
+    { alon: 0, alat: 0, blon: 1, blat: 1, expected: 1.2745557823062943 },
+    { alon: 1, alat: 1, blon: 0, blat: 0, expected: 1.2745557823062943 },
+    { alon: -1, alat: -1, blon: 0, blat: 0, expected: 1.2745557823062943 }
+  ].each do |fixture|
+    context "when source(#{fixture[:alon]}, #{fixture[:alat]}) and destination(#{fixture[:blon]}, #{fixture[:blat]})" do
+      let(:expected) { fixture[:expected] }
+
+      before do
+        allow(calculator).to receive(:source_longitude).and_return(fixture[:alon])
+        allow(calculator).to receive(:source_latitude).and_return(fixture[:alat])
+        allow(calculator).to receive(:destination_longitude).and_return(fixture[:blon])
+        allow(calculator).to receive(:destination_latitude).and_return(fixture[:blat])
+      end
+
+      it { is_expected.to eq(expected) }
+    end
+  end
+end
