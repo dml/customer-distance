@@ -18,3 +18,7 @@ Style/Documentation:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/console/**/*.rb'
