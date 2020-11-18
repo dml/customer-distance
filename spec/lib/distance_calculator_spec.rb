@@ -60,13 +60,13 @@ RSpec.describe DistanceCalculator do
     [
       { alon: 0, alat: 0, blon: 0, blat: 0, expected: 0 },
       { alon: 1, alat: 1, blon: 1, blat: 1, expected: 0 },
-      { alon: 1, alat: 0, blon: 0, blat: 0, expected: 0.9999999999999998 },
-      { alon: 0, alat: 0, blon: 1, blat: 0, expected: 0.9999999999999998 },
-      { alon: 0, alat: 1, blon: 0, blat: 0, expected: 0.9999999999999998 },
-      { alon: 0, alat: 0, blon: 0, blat: 1, expected: 0.9999999999999998 },
-      { alon: 0, alat: 0, blon: 1, blat: 1, expected: 1.2745557823062943 },
-      { alon: 1, alat: 1, blon: 0, blat: 0, expected: 1.2745557823062943 },
-      { alon: -1, alat: -1, blon: 0, blat: 0, expected: 1.2745557823062943 }
+      { alon: 1, alat: 0, blon: 0, blat: 0, expected: 0.9999999999999997 },
+      { alon: 0, alat: 0, blon: 1, blat: 0, expected: 0.9999999999999997 },
+      { alon: 0, alat: 1, blon: 0, blat: 0, expected: 0.9999999999999997 },
+      { alon: 0, alat: 0, blon: 0, blat: 1, expected: 0.9999999999999997 },
+      { alon: 0, alat: 0, blon: 1, blat: 1, expected: 1.274555782306293 },
+      { alon: 1, alat: 1, blon: 0, blat: 0, expected: 1.274555782306293 },
+      { alon: -1, alat: -1, blon: 0, blat: 0, expected: 1.274555782306293 }
     ].each do |fixture|
       context_definition = <<-DEFINITION
         when source(#{fixture[:alon]}, #{fixture[:alat]})

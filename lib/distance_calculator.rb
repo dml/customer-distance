@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DistanceCalculator
-  PRECISION = 16
+  PRECISION = 14
 
   MEAN_EARTH_RADIUS = 6_371.0088 # kilometers
 
@@ -31,10 +31,6 @@ class DistanceCalculator
     b = Math.cos(source_latitude) \
         * Math.cos(destination_latitude) \
         * Math.cos(absolute_longitude_difference)
-
-    puts '*' * 80
-    puts (a + b).round(PRECISION).inspect
-    puts '*' * 80
 
     Math.acos((a + b).round(PRECISION))
   end
