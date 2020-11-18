@@ -23,6 +23,18 @@ class DistanceCalculator
   end
 
   def central_angle
+    puts '*' * 80
+    puts source_latitude.inspect
+    puts source_longitude.inspect
+    puts destination_latitude.inspect
+    puts destination_longitude.inspect
+    puts absolute_longitude_difference.inspect
+    puts (
+      Math.sin(source_latitude) * Math.sin(destination_latitude) +
+      Math.cos(source_latitude) * Math.cos(destination_latitude) * Math.cos(absolute_longitude_difference)
+    ).inspect
+    puts '*' * 80
+
     Math.acos(
       Math.sin(source_latitude) * Math.sin(destination_latitude) +
       Math.cos(source_latitude) * Math.cos(destination_latitude) * Math.cos(absolute_longitude_difference)
