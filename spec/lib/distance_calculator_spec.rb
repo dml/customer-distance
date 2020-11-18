@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../support/custom_matchers'
 require_relative '../../lib/distance_calculator'
 
 RSpec.describe DistanceCalculator do
+  let(:tolerance) { 1e-08 }
+
   describe '.degrees_to_radians' do
     subject { calculator.degrees_to_radians(degtrees) }
 
@@ -96,8 +99,8 @@ RSpec.describe DistanceCalculator do
         calculator.set_destination(3.3333333, -4.4444444)
       end
 
-      it { expect(calculator.destination_longitude).to eq(0.05817764115136789) }
-      it { expect(calculator.destination_latitude).to eq(-0.07757018820182386) }
+      it { expect(calculator.destination_longitude).to equal_with_tolerance(0.05817764115136789, tolerance) }
+      it { expect(calculator.destination_latitude).to equal_with_tolerance(-0.07757018820182386, tolerance) }
     end
   end
 
@@ -114,21 +117,21 @@ RSpec.describe DistanceCalculator do
       let(:source) { [-6.257664, 53.339428] }
       let(:destination) { [-6.257664, 53.339428] }
 
-      it { is_expected.to eq(0) }
+      it { is_expected.to equal_with_tolerance(0, tolerance) }
     end
 
     context 'when difference is one degree on meridian' do
       let(:source) { [0, 0] }
       let(:destination) { [0, 1] }
 
-      it { is_expected.to eq(111.19508023352181) }
+      it { is_expected.to equal_with_tolerance(111.19508023352181, tolerance) }
     end
 
     context 'when source and destination points are different' do
       let(:source) { [-6.257664, 53.339428] }
       let(:destination) { [-8.5127, 51.9067] }
 
-      it { is_expected.to eq(220.32162659875155) }
+      it { is_expected.to equal_with_tolerance(220.32162659875155, tolerance) }
     end
   end
 
@@ -139,8 +142,8 @@ RSpec.describe DistanceCalculator do
     let(:latitude) { '53.339428' }
 
     it { is_expected.to be_a(described_class) }
-    it { expect(calculator.source_longitude).to eq(-0.10921684028351844) }
-    it { expect(calculator.source_latitude).to eq(0.9309486397304539) }
+    it { expect(calculator.source_longitude).to equal_with_tolerance(-0.10921684028351844, tolerance) }
+    it { expect(calculator.source_latitude).to equal_with_tolerance(0.9309486397304539, tolerance) }
   end
 
   describe '.to' do
@@ -151,7 +154,7 @@ RSpec.describe DistanceCalculator do
     let(:latitude) { '51.9067' }
 
     it { is_expected.to be_a(described_class) }
-    it { expect(calculator.destination_longitude).to eq(-0.1485746432345213) }
-    it { expect(calculator.destination_latitude).to eq(0.9059428188449407) }
+    it { expect(calculator.destination_longitude).to equal_with_tolerance(-0.1485746432345213, tolerance) }
+    it { expect(calculator.destination_latitude).to equal_with_tolerance(0.9059428188449407, tolerance) }
   end
 end
