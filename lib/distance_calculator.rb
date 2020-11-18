@@ -33,6 +33,16 @@ class DistanceCalculator
     MEAN_EARTH_RADIUS * central_angle
   end
 
+  def to(longitude, latitude)
+    set_destination(longitude, latitude)
+
+    self
+  end
+
+  def self.from(longitude, latitude)
+    new(longitude, latitude)
+  end
+
   def self.degrees_to_radians(degrees)
     degrees.to_f * Math::PI / 180
   end

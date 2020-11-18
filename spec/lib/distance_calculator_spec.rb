@@ -131,4 +131,27 @@ RSpec.describe DistanceCalculator do
       it { is_expected.to eq(220.32162659875155) }
     end
   end
+
+  describe '.from' do
+    subject(:calculator) { described_class.from(longitude, latitude) }
+
+    let(:longitude) { '-6.257664' }
+    let(:latitude) { '53.339428' }
+
+    it { is_expected.to be_a(described_class) }
+    it { expect(calculator.source_longitude).to eq(-0.10921684028351844) }
+    it { expect(calculator.source_latitude).to eq(0.9309486397304539) }
+  end
+
+  describe '.to' do
+    subject(:calculator) { source.to(longitude, latitude) }
+
+    let(:source) { described_class.from('-6.257664', '53.339428') }
+    let(:longitude) { '-8.5127' }
+    let(:latitude) { '51.9067' }
+
+    it { is_expected.to be_a(described_class) }
+    it { expect(calculator.destination_longitude).to eq(-0.1485746432345213) }
+    it { expect(calculator.destination_latitude).to eq(0.9059428188449407) }
+  end
 end
