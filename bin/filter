@@ -1,20 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'json'
-require_relative '../lib/distance_calculator'
+require_relative '../lib/cli'
 
-calculator = DistanceCalculator.from(-6.257664, 53.339428)
-
-data = {}
-IO.readlines(ARGV[0]).each do |line|
-  record = JSON.parse(line, symbolize_names: true)
-  distance = calculator.to(record[:longitude], record[:latitude]).distance
-
-  next unless distance <= 100.0
-
-  data[record[:user_id]] = record[:name]
-end
-
-data.keys.sort.each do |user_id|
-  puts JSON.dump({ name: data[user_id], user_id: user_id })
-end
+CLI.run
