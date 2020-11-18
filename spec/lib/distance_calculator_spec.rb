@@ -83,7 +83,7 @@ RSpec.describe DistanceCalculator do
           allow(calculator).to receive(:destination_latitude).and_return(fixture[:blat])
         end
 
-        it { is_expected.to eq(expected) }
+        it { is_expected.to equal_with_tolerance(expected, tolerance) }
       end
     end
   end
