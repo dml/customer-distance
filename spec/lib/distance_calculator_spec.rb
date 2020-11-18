@@ -22,7 +22,7 @@ RSpec.describe DistanceCalculator do
         let(:degtrees) { fixture[:degtrees] }
         let(:radians) { fixture[:radians] }
 
-        it { is_expected.to eq(radians) }
+        it { is_expected.to equal_with_tolerance(radians, tolerance) }
       end
     end
   end

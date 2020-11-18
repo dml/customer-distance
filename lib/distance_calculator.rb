@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'bigdecimal'
+
 class DistanceCalculator
   MEAN_EARTH_RADIUS = 6_371.0088 # kilometers
 
@@ -23,18 +25,6 @@ class DistanceCalculator
   end
 
   def central_angle
-    puts '*' * 80
-    puts source_latitude.inspect
-    puts source_longitude.inspect
-    puts destination_latitude.inspect
-    puts destination_longitude.inspect
-    puts absolute_longitude_difference.inspect
-    puts (
-      Math.sin(source_latitude) * Math.sin(destination_latitude) +
-      Math.cos(source_latitude) * Math.cos(destination_latitude) * Math.cos(absolute_longitude_difference)
-    ).inspect
-    puts '*' * 80
-
     Math.acos(
       Math.sin(source_latitude) * Math.sin(destination_latitude) +
       Math.cos(source_latitude) * Math.cos(destination_latitude) * Math.cos(absolute_longitude_difference)
@@ -56,6 +46,6 @@ class DistanceCalculator
   end
 
   def self.degrees_to_radians(degrees)
-    degrees.to_f * Math::PI / 180
+    BigDecimal(degrees, 16) * Math::PI / 180.0
   end
 end
