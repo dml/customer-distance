@@ -32,6 +32,10 @@ class DistanceCalculator
         * Math.cos(destination_latitude) \
         * Math.cos(absolute_longitude_difference)
 
+    puts '*' * 80
+    puts (a + b).round(PRECISION).inspect
+    puts '*' * 80
+
     Math.acos((a + b).round(PRECISION))
   end
 
