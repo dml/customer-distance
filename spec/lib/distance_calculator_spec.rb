@@ -4,7 +4,7 @@ require_relative '../support/custom_matchers'
 require_relative '../../lib/distance_calculator'
 
 RSpec.describe DistanceCalculator do
-  let(:tolerance) { 1e-08 }
+  let(:tolerance) { 1e-7 }
 
   describe '.degrees_to_radians' do
     subject { calculator.degrees_to_radians(degtrees) }
@@ -60,10 +60,10 @@ RSpec.describe DistanceCalculator do
     [
       { alon: 0, alat: 0, blon: 0, blat: 0, expected: 0 },
       { alon: 1, alat: 1, blon: 1, blat: 1, expected: 0 },
-      { alon: 1, alat: 0, blon: 0, blat: 0, expected: 0.9999999999999999 },
-      { alon: 0, alat: 0, blon: 1, blat: 0, expected: 0.9999999999999999 },
-      { alon: 0, alat: 1, blon: 0, blat: 0, expected: 0.9999999999999999 },
-      { alon: 0, alat: 0, blon: 0, blat: 1, expected: 0.9999999999999999 },
+      { alon: 1, alat: 0, blon: 0, blat: 0, expected: 0.9999999999999998 },
+      { alon: 0, alat: 0, blon: 1, blat: 0, expected: 0.9999999999999998 },
+      { alon: 0, alat: 1, blon: 0, blat: 0, expected: 0.9999999999999998 },
+      { alon: 0, alat: 0, blon: 0, blat: 1, expected: 0.9999999999999998 },
       { alon: 0, alat: 0, blon: 1, blat: 1, expected: 1.2745557823062943 },
       { alon: 1, alat: 1, blon: 0, blat: 0, expected: 1.2745557823062943 },
       { alon: -1, alat: -1, blon: 0, blat: 0, expected: 1.2745557823062943 }

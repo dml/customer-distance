@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DistanceCalculator
-  PRECISION = 32
+  PRECISION = 16
 
   MEAN_EARTH_RADIUS = 6_371.0088 # kilometers
 
