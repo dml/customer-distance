@@ -2,38 +2,44 @@
 
 The geofence customer filter
 
-## Setup and Run
+
+## Development and Tests
 
 If you have [asdf](https://github.com/asdf-vm/asdf) runtime manager installed
 you may use following snippet to install all dependencies and run the filter
 
 ```sh
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-
 asdf install
-
-bundle exec bin/filter samples/input.txt
 ```
 
-Docker option is also available
+Bundle installs required gems
 
 ```sh
-docker build -t filterapp .
-docker run --rm filterapp bin/filter samples/input.txt
+bundle install
+bundle exec bin/filter samples/customers
 ```
 
-## Development and Test
-
-With your local `asdf` manager run
+To run specs and linter checks
 
 ```sh
 bundle exec rspec    # to check if no tests were failed
 bundle exec rubocop  # to check if code properly formatted
 ```
 
-With your Docker envionment
+## Docker
+
+Docker is a quick way to start application with no development dependencies
 
 ```sh
-docker run bundle rspec
-docker run bundle rubocop
+docker build -t filterapp .
+docker run --rm filterapp bin/filter samples/customers
+```
+
+In order to run test suits with Docker
+
+```sh
+docker build -f Dockerfile.dev -t filterapp-dev .
+docker run --rm filterapp-dev bundle exec rspec
+docker run --rm filterapp-dev bundle exec rubocop
 ```
